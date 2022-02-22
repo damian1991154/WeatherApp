@@ -73,6 +73,16 @@ class City {
 //////////////////////////////////////////////////////////////
 // CITY BOX FUNCTIONS
 //////////////////////////////////////////////////////////////
+const toggleMobileMenu = function () {
+	menuBoxEl.classList.toggle('menu--on');
+	bodyEl.classList.toggle('body-disable');
+};
+
+const hideMobileMenu = function () {
+	menuBoxEl.classList.remove('menu--on');
+	bodyEl.classList.remove('body-disable');
+};
+
 const closeUserInformation = function () {
 	userInfoEl.classList.remove('user-info--on');
 };
@@ -466,7 +476,7 @@ const updateCityObjectValues = function (objectTo, objectFrom) {
 
 const updateAllWeatherBoxes = function () {
 	// hide mobile menu
-	menuBoxEl.classList.remove('menu--on');
+	hideMobileMenu();
 
 	// get current information about weather for every saved in arrayCityObjects place
 	arrayCityObjects.forEach((updateEl) => {
@@ -526,7 +536,7 @@ const deleteWeatherBox = function (weatherBoxDelete) {
 
 const deleteAllWeatherBoxes = function () {
 	// hide mobile menu
-	menuBoxEl.classList.remove('menu--on');
+	hideMobileMenu();
 
 	arrayCityObjects.forEach((deleteEl) => {
 		// getting all HTML WeatherBox nodes
@@ -988,8 +998,7 @@ const cityFromSugestionListner = function () {
 };
 
 menuButtonEl.addEventListener('click', function () {
-	menuBoxEl.classList.toggle('menu--on');
-	bodyEl.classList.toggle('body-disable');
+	toggleMobileMenu();
 });
 
 userInfoCloseEl.addEventListener('click', function () {
