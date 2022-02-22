@@ -1,0 +1,301 @@
+@import 'variables.scss';
+
+// main container for weather boxes
+.weather {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+	grid-gap: 8rem;
+	justify-content: center;
+	align-items: start;
+	height: 100%;
+
+	// styles for weatherBoxes and box to add new city
+	&-box,
+	&-box-add {
+		position: relative;
+		padding: 1.6rem 1.6rem 0;
+		min-height: 55rem;
+		max-width: 50rem;
+		background-image: linear-gradient(
+			var(--gradient-color-3-dark),
+			var(--gradient-color-3-light)
+		);
+		box-shadow: 0 5px 10px var(--color-shadow);
+		border-radius: 25px;
+		color: $font-white;
+		transform: translateY(0);
+	}
+
+	// styles only for weatherBoxes
+	&-box {
+		cursor: pointer;
+		transition: 0.7s $transition-cubic;
+
+		// weatherBox is divided by front (visible part of box) and back (part that is visible when we expands box)
+		// FRONT START
+		&-front {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		// city name
+		&--name {
+			text-transform: uppercase;
+			font-weight: 300;
+			letter-spacing: 3px;
+			margin-bottom: 1.6rem;
+			font-size: 2rem;
+		}
+
+		// weather icon
+		&--icon {
+			margin-bottom: 1.2rem;
+			cursor: pointer;
+			height: 16rem;
+		}
+
+		// main temperature
+		&--temp {
+			font-size: 6.2rem;
+			font-weight: 300;
+
+			// small temp. unit
+			span {
+				font-size: 2.4rem;
+				font-weight: 200;
+				margin-left: 0.4rem;
+			}
+		}
+
+		// description of weather condition
+		&--desc {
+			font-size: 2rem;
+			font-weight: 200;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		// box for min and max temp.
+		&--temp-box {
+			display: flex;
+			justify-content: space-around;
+			width: 100%;
+			margin-top: 3.2rem;
+
+			&-min,
+			&-max {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				&-icon {
+					stroke: $font-purple;
+				}
+
+				&-temp {
+					font-size: 3rem;
+					font-weight: 200;
+
+					span {
+						font-size: 1.4rem;
+					}
+				}
+			}
+		}
+		// FRONT END
+
+		// styles for back part of box
+		// BACK START
+		&-back {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			justify-items: center;
+			align-items: center;
+			height: 0;
+			transform: scaleY(0);
+			margin-top: 2.4rem;
+			transition: all 0.4s;
+
+			// graphic represents of all weather conditions (wind,...)
+			&--icon {
+				stroke: $font-purple;
+			}
+
+			// every item of weather condition (icon + value + unit)
+			&--item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				visibility: hidden;
+				transition: all 0.1s;
+
+				&-value {
+					font-size: 3rem;
+					font-weight: 200;
+
+					span {
+						font-size: 1.4rem;
+					}
+				}
+
+				// time of last update - title
+				&-time-label {
+					margin-top: 0.8rem;
+					font-size: 1.4rem;
+					font-weight: 200;
+				}
+
+				// time of last update - value
+				&-time-value {
+					font-size: 1.6rem;
+					font-weight: 200;
+				}
+			}
+
+			// time box item expand all parent width
+			&--item:last-child {
+				grid-column: 1 / -1;
+			}
+		}
+		// BACK END
+
+		// styles for icon to close and delete box
+		&-delete-box {
+			transform: translate(-15px, 15px);
+
+			&:hover {
+				transform: translate(-15px, 15px) scale(1.2);
+			}
+		}
+
+		// animation class runs when box is deleted
+		&--delete {
+			transform: translateY(-30px);
+			animation: fade-out 0.3s;
+			animation-fill-mode: forwards;
+		}
+
+		// animation class runs when box is added
+		&--add {
+			transform: translateY(-50px);
+			animation: fade-in 0.7s;
+			animation-fill-mode: forwards;
+		}
+	}
+
+	// animation class added when box expands
+	&-box--on {
+		.weather-box-back {
+			height: 32rem;
+			transform: scaleY(1);
+
+			&--item {
+				visibility: visible;
+			}
+		}
+	}
+
+	// styles for box adding cities
+	&-box-add {
+		position: relative;
+		cursor: auto;
+
+		// input for new cities
+		.city-input {
+			margin-bottom: 3.2rem;
+			width: 70%;
+
+			&-field-box {
+				border-bottom: 1px solid $font-white;
+			}
+
+			&-field {
+				border: none;
+				padding: 5px 10px;
+				width: 100%;
+				background-color: transparent;
+				color: $font-white;
+				font-size: 1.6rem;
+				font-weight: 300;
+				letter-spacing: 1px;
+			}
+
+			&-field:focus {
+				outline: none;
+			}
+
+			&-field::placeholder {
+				color: $font-grey;
+			}
+
+			// sugestion list is visible dynamically when user typing
+			&--box {
+				position: relative;
+				z-index: 200;
+				border-bottom-left-radius: 20px;
+				border-bottom-right-radius: 20px;
+				overflow: hidden;
+				transition: 0.3s;
+				height: auto;
+
+				&-list {
+					list-style: none;
+					font-size: 1.4rem;
+					transform: scaleY(0);
+					transform-origin: top;
+					background-color: rgba(50, 50, 50, 0.8);
+					transition: transform 0.4s $transition-cubic;
+
+					&--on {
+						transform: scaleY(1);
+					}
+
+					.sugestionItem {
+						padding: 0.7rem 3.2rem;
+						cursor: pointer;
+						z-index: 400;
+
+						// city administration
+						.admin {
+							color: $font-grey;
+							font-size: 1.2rem;
+						}
+					}
+
+					.sugestionItem:hover {
+						background-color: var(--slider-color);
+
+						.admin {
+							color: $dark-gray;
+						}
+					}
+
+					.infoMessage {
+						padding: 0.7rem 3.2rem;
+						cursor: default;
+					}
+				}
+			}
+		}
+
+		// new city adding icon
+		.weather-box-add-icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			stroke: $font-grey;
+
+			&--on {
+				stroke: $font-white;
+				cursor: pointer;
+				z-index: 300;
+			}
+		}
+
+		& .weather-box--name {
+			margin-bottom: 3.2rem;
+		}
+	}
+}

@@ -1,0 +1,78 @@
+@media (max-width: 1300px) {
+	html {
+		font-size: 56.25%;
+	}
+
+	.weather {
+		grid-gap: 4rem;
+	}
+}
+
+@media (max-width: 1100px) {
+	html {
+		font-size: 50%;
+	}
+
+	.main {
+		padding: 6rem 6rem;
+	}
+}
+
+@media (max-width: 950px) {
+	.main {
+		padding: 8rem 8rem;
+	}
+}
+
+@media (max-width: 760px) {
+	html {
+		font-size: 43.75%;
+	}
+
+	.main {
+		padding: 6rem 6rem;
+	}
+
+	.menu-icon {
+		display: block;
+	}
+
+	.navigation {
+		padding-left: 6.4rem;
+	}
+
+	.menu-options {
+		display: none;
+	}
+}
+
+@media (max-width: 600px) {
+	html {
+		font-size: 50%;
+	}
+
+	.weather {
+		grid-template-columns: 1fr;
+	}
+
+	.weather-box,
+	.weather-box-add {
+		max-width: none;
+	}
+
+	.main {
+		padding: 6rem 6rem;
+	}
+
+	.menu-icon {
+		display: block;
+	}
+
+	.navigation {
+		padding-left: 6.4rem;
+	}
+
+	.menu-options {
+		display: none;
+	}
+}

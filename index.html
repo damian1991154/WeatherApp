@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WeatherApp</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"
+			rel="stylesheet"
+		/>
+
+		<meta
+			name="description"
+			content="WeatherApp is a project created for mastering HTML, CSS and JS knowledge. You can simply add some bunch of cities around the world to your virtual desktop and check current weather condition in them!"
+		/>
+
+		<link
+			rel="icon"
+			href="./svg/2_/day/smallCloud.svg"
+			<link
+			rel="stylesheet"
+			href="css/style.css"
+		/>
+
+		<link rel="apple-touch-icon" href="./svg/2_/day/smallCloud.svg" />
+
+		<link rel="manifest" href="manifest.webmanifest" />
+
+		<link rel="stylesheet" href="css/loaderSpinner.css" />
+		<link rel="stylesheet" href="css/components.css" />
+		<link rel="stylesheet" href="css/weatherBox.css" />
+		<link rel="stylesheet" href="css/animations.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/mediaQ.css" />
+
+		<script src="js/script.js" defer></script>
+	</head>
+	<body class="body">
+		<div class="menu-icon">
+			<div class="menu-icon--line"></div>
+		</div>
+		<div class="menu">
+			<ul class="menu-list">
+				<li class="menu-list-item">Home</li>
+				<li class="menu-list-item">
+					<a href="#">
+						<button onclick="updateAllWeatherBoxes()">Refresh All</button>
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a href="#">
+						<button onclick="deleteAllWeatherBoxes()">Delete All</button>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="container">
+			<header class="header">
+				<nav class="navigation">
+					<div class="navigation-left">
+						<p class="logo">Weather<span>App</span></p>
+						<ul class="menu-options">
+							<li class="menu-options-item">
+								<div class="menu-options-item-header"><p>Home</p></div>
+							</li>
+							<li class="menu-options-item">
+								<div class="menu-options-item-header expandable">
+									<p>Options</p>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-chevron-down menu-options-item-icon"
+										width="25"
+										height="25"
+										viewBox="0 0 24 24"
+										stroke-width="1"
+										stroke="#000000"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<polyline points="6 9 12 15 18 9" />
+									</svg>
+								</div>
+								<div class="menu-options-item-body">
+									<ul class="menu-options-item-body-list">
+										<li class="menu-options-item-body-list-item">
+											<a href="#">
+												<button onclick="updateAllWeatherBoxes()">
+													Refresh All
+												</button>
+											</a>
+										</li>
+										<li class="menu-options-item-body-list-item">
+											<a href="#">
+												<button onclick="deleteAllWeatherBoxes()">
+													Delete All
+												</button>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="navigation-right">
+						<div class="slider-box">
+							<p class="slider-box--text">Light</p>
+							<div class="slider-box--center">
+								<div class="slider-box--track">
+									<div class="slider-box--button"></div>
+								</div>
+							</div>
+							<p class="slider-box--text">Dark</p>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<main class="main">
+				<div class="wrapper">
+					<div class="weather">
+						<!-- <div class="weather-box">
+							<div class="weather-box-front">
+								<div class="weather-box-delete-box"></div>
+								<h2 class="weather-box--name">Pekin</h2>
+								<img class="weather-box--icon" src="svg/rain.svg" />
+								<p class="weather-box--temp">20<span>&#x2103;</span></p>
+								<p class="weather-box--desc">Cloudy</p>
+								<div class="weather-box--temp-box">
+									<div class="weather-box--temp-box-min">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="icon icon-tabler icon-tabler-chevron-down weather-box--temp-box-min-icon"
+											width="30"
+											height="30"
+											viewBox="0 0 24 24"
+											stroke-width="1"
+											stroke="#000000"
+											fill="none"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+											<polyline points="6 9 12 15 18 9" />
+										</svg>
+										<p class="weather-box--temp-box-min-temp">
+											15 <span>&#x2103;</span>
+										</p>
+									</div>
+									<div class="weather-box--temp-box-max">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="icon icon-tabler icon-tabler-chevron-up weather-box--temp-box-max-icon"
+											width="30"
+											height="30"
+											viewBox="0 0 24 24"
+											stroke-width="1"
+											stroke="#000000"
+											fill="none"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+											<polyline points="6 15 12 9 18 15" />
+										</svg>
+										<p class="weather-box--temp-box-max-temp">
+											25 <span>&#x2103;</span>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="weather-box-back">
+								<div class="weather-box-back--item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-wind weather-box-back--icon"
+										width="30"
+										height="30"
+										viewBox="0 0 24 24"
+										stroke-width="1"
+										stroke="#ffffff"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<path d="M5 8h8.5a2.5 2.5 0 1 0 -2.34 -3.24" />
+										<path d="M3 12h15.5a2.5 2.5 0 1 1 -2.34 3.24" />
+										<path d="M4 16h5.5a2.5 2.5 0 1 1 -2.34 3.24" />
+									</svg>
+									<p class="weather-box-back--item-value">35 <span>km/h</span></p>
+								</div>
+								<div class="weather-box-back--item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-arrows-double-ne-sw weather-box-back--icon"
+										width="30"
+										height="30"
+										viewBox="0 0 24 24"
+										stroke-width="1"
+										stroke="#ffffff"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<path d="M3 14l11 -11" />
+										<path d="M10 3h4v4" />
+										<path d="M10 17v4h4" />
+										<path d="M21 10l-11 11" />
+									</svg>
+									<p class="weather-box-back--item-value">
+										35 <span>&#176;</span>
+									</p>
+								</div>
+								<div class="weather-box-back--item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-droplet weather-box-back--icon"
+										width="30"
+										height="30"
+										viewBox="0 0 24 24"
+										stroke-width="1"
+										stroke="#ffffff"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<path d="M6.8 11a6 6 0 1 0 10.396 0l-5.197 -8l-5.2 8z" />
+									</svg>
+									<p class="weather-box-back--item-value">35 <span>%</span></p>
+								</div>
+								<div class="weather-box-back--item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-droplet-half-2 weather-box-back--icon"
+										width="30"
+										height="30"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="#ffffff"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<path d="M6.8 11a6 6 0 1 0 10.396 0l-5.197 -8l-5.2 8z" />
+										<path d="M6 14h12" />
+									</svg>
+									<p class="weather-box-back--item-value">35 <span>mm</span></p>
+								</div>
+								<div class="weather-box-back--item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-arrow-bar-to-down weather-box-back--icon"
+										width="30"
+										height="30"
+										viewBox="0 0 24 24"
+										stroke-width="1"
+										stroke="#ffffff"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<line x1="4" y1="20" x2="20" y2="20" />
+										<line x1="12" y1="14" x2="12" y2="4" />
+										<line x1="12" y1="14" x2="16" y2="10" />
+										<line x1="12" y1="14" x2="8" y2="10" />
+									</svg>
+									<p class="weather-box-back--item-value">35 <span>hPa</span></p>
+								</div>
+								<div class="weather-box-back--item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="icon icon-tabler icon-tabler-eye weather-box-back--icon"
+										width="30"
+										height="30"
+										viewBox="0 0 24 24"
+										stroke-width="1"
+										stroke="#ffffff"
+										fill="none"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<circle cx="12" cy="12" r="2" />
+										<path
+											d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
+										/>
+									</svg>
+									<p class="weather-box-back--item-value">35 <span>m</span></p>
+								</div>
+	
+								<div class="weather-box-back--item">
+									<p class="weather-box-back--item-time-label">Last update:</p>
+									<p class="weather-box-back--item-time-value">
+										12-04-2021 19:03
+									</p>
+								</div>
+							</div>
+							<div class="expand-arrow">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="icon icon-tabler icon-tabler-chevron-up expand-arrow-icon"
+									width="30"
+									height="30"
+									viewBox="0 0 24 24"
+									stroke-width="1"
+									stroke="#000000"
+									fill="none"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+									<polyline points="6 9 12 15 18 9" />
+								</svg>
+							</div>
+						</div> -->
+						<div class="weather-box-add">
+							<div class="weather-box-front">
+								<h2 class="weather-box--name">Add city</h2>
+								<div class="city-input">
+									<div class="city-input-field-box">
+										<input
+											class="city-input-field"
+											placeholder="City name..."
+											type="text"
+											name="city"
+											id="city_input"
+											autocomplete="off"
+											required
+										/>
+									</div>
+									<div class="city-input--box">
+										<ul class="city-input--box-list">
+											<!-- <li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+	
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li>
+											<li>
+												<p class="city">Warsaw - (PL)</p>
+												<p class="admin">Mazowieckie</p>
+											</li> -->
+										</ul>
+									</div>
+								</div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="icon icon-tabler icon-tabler-circle-plus weather-box-add-icon"
+									width="150"
+									height="150"
+									viewBox="0 0 24 24"
+									stroke-width="1"
+									stroke="#ffffff"
+									fill="none"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+									<circle cx="12" cy="12" r="9" />
+									<line x1="9" y1="12" x2="15" y2="12" />
+									<line x1="12" y1="9" x2="12" y2="15" />
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+			<footer class="footer">
+				&copy;2022 Damian Królak. Layout created from scratch based on image
+				of&nbsp;
+				<a
+					href="https://www.agiratech.com/top-7-front-end-projects-to-build-your-portfolio"
+					target="_blank"
+				>
+					Weather Application </a
+				>&nbsp;designed by Hamed Baatour.
+			</footer>
+		</div>
+		<div class="user-info">
+			<div class="close-box user-info-close"></div>
+			<p class="user-info-title">Information</p>
+			<p class="user-info-text">
+				<!-- You cannot add this city because it already exist in Your city list! -->
+			</p>
+		</div>
+	</body>
+	<div class="hero-background">
+		<div class="load-spinner">
+			<div class="lds-default">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+</html>

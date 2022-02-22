@@ -1,0 +1,9 @@
+{
+	"icons": [
+		{
+			"src": "./svg/2_/day/smallCloud.svg",
+			"type": "image/png",
+			"sizes": "192x192"
+		}
+	]
+}

@@ -1,0 +1,419 @@
+@import 'variables.scss';
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// MENU
+////////////////////////////////////////////////////////////////////////////////////////////
+
+// menu box
+.menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	background-color: var(--gradient-color-3-light);
+	transition: 0.4s $transition-cubic;
+	transform-origin: left;
+	z-index: 2;
+	visibility: hidden;
+
+	// Mobile menu
+	&--on {
+		width: 100%;
+		visibility: visible;
+
+		.menu-list {
+			opacity: 1;
+		}
+	}
+
+	&-list {
+		position: absolute;
+		opacity: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-transform: uppercase;
+		list-style: none;
+		color: $font-white;
+		font-size: 4.2rem;
+		width: 100%;
+
+		&-item {
+			display: flex;
+			justify-content: center;
+			padding: 2.4rem;
+			font-weight: 200;
+
+			a:link,
+			a:visited {
+				display: inline-block;
+				text-decoration: none;
+				font-weight: 200;
+				color: $font-white;
+
+				button {
+					display: inline-block;
+					outline: none;
+					border: none;
+					background-color: var(--slider-color);
+					height: 100%;
+					font-size: inherit;
+					color: inherit;
+					cursor: pointer;
+					padding: 1.2rem 3.2rem;
+					text-align: left;
+					font-weight: inherit;
+					font-family: 'Poppins', sans-serif;
+				}
+			}
+		}
+	}
+
+	// Desktop menu
+	&-options {
+		display: flex;
+		list-style: none;
+		color: $font-white;
+		font-size: 1.8rem;
+		font-weight: 200;
+		margin-left: 4.8rem;
+		letter-spacing: 2px;
+		height: 100%;
+
+		&-item {
+			position: relative;
+
+			// icon chevron down
+			&-icon {
+				stroke: $font-white;
+			}
+
+			// header part of menu - Home, Options,...
+			&-header {
+				display: flex;
+				align-items: center;
+				height: 100%;
+				cursor: pointer;
+				flex: 1;
+				padding: 0 3.2rem;
+				transition: 0.3s;
+
+				&:hover {
+					color: var(--menu-font-color);
+					background-color: var(--slider-color);
+				}
+
+				// change color of icon when hover on header item
+				&:hover .menu-options-item-icon {
+					stroke: var(--menu-font-color);
+				}
+			}
+
+			// when hovering on header item, show body of this header
+			&:hover &-body {
+				width: auto;
+				visibility: visible;
+				z-index: 100;
+			}
+
+			&:hover &-header {
+				background-color: var(--slider-color);
+			}
+
+			.expandable {
+				width: 20rem;
+			}
+
+			// body part of menu
+			&-body {
+				position: absolute;
+				visibility: hidden;
+				height: 0;
+
+				&-list {
+					list-style: none;
+					background-color: var(--slider-color);
+					width: 20rem;
+
+					&-item {
+						width: auto;
+
+						a:link,
+						a:visited {
+							display: inline-block;
+							text-decoration: none;
+							color: $font-white;
+							font-weight: 200;
+							width: 100%;
+
+							button {
+								display: inline-block;
+								outline: none;
+								border: none;
+								background-color: var(--slider-color);
+								width: 100%;
+								height: 100%;
+								font-size: 1.8rem;
+								color: inherit;
+								cursor: pointer;
+								padding: 1.2rem 3.2rem;
+								text-align: left;
+								font-weight: inherit;
+								font-family: 'Poppins', sans-serif;
+							}
+						}
+
+						a:hover {
+							button {
+								background-color: var(--menu-font-color);
+								transform: scale(1.05);
+							}
+						}
+
+						a:active {
+							button {
+								transform: scale(1);
+							}
+						}
+					}
+				}
+
+				&--on {
+					visibility: visible;
+					height: auto;
+				}
+			}
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// MENU END
+////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// MENU ICON - mobile version
+////////////////////////////////////////////////////////////////////////////////////////////
+.menu-icon {
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	width: 3.2rem;
+	height: 3.2rem;
+	cursor: pointer;
+	z-index: 3000;
+	display: none;
+
+	&--line {
+		width: 100%;
+		height: 3px;
+		background-color: $font-white;
+		position: absolute;
+		bottom: 50%;
+	}
+
+	&--line::before,
+	&--line::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 3px;
+		background-color: $font-white;
+		transform: translateY(-10px);
+		transition: 0.4s $transition-cubic;
+	}
+
+	&--line::after {
+		transform: translateY(10px);
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// MENU ICON END
+////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// USER INFO BOX - messeges for users
+////////////////////////////////////////////////////////////////////////////////////////////
+.user-info {
+	position: fixed;
+	bottom: 20%;
+	right: 0;
+	z-index: 100;
+	background-color: var(--gradient-color-3-dark);
+	padding: 0 3.2rem 3.2rem;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	box-shadow: 5px 5px 15px 5px rgba(50, 50, 50, 0.5);
+	transform: translateX(120%);
+	transition: transform 0.5s $transition-cubic;
+	color: var(--light-theme);
+
+	&--on {
+		transform: translateX(0);
+	}
+
+	&-title {
+		font-size: 1.6rem;
+		padding: 1.8rem 0 1.4rem;
+		text-transform: uppercase;
+	}
+
+	&-text {
+		font-size: 1.4rem;
+		font-weight: 200;
+		color: $font-white;
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// USER INFO BOX END
+////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// THEME SLIDER BOX - component for change theme
+////////////////////////////////////////////////////////////////////////////////////////////
+.slider-box {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+
+	&--text {
+		font-size: 1.4rem;
+		color: $font-white;
+		font-weight: 300;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	&--track {
+		position: relative;
+
+		background-color: var(--slider-color);
+		height: 15px;
+		width: 40px;
+		border-radius: 50px;
+		cursor: pointer;
+	}
+
+	&--button {
+		position: absolute;
+
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: $font-white;
+		top: 50%;
+		transform: translateY(-50%) translateX(100%);
+		transition: transform 0.3s;
+	}
+
+	&--button-light {
+		transform: translateY(-50%) translateX(0%);
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// USER INFO BOX END
+////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// SEARCH SPINNER WITH BACKGROUND - when fetching API data in background
+////////////////////////////////////////////////////////////////////////////////////////////
+.hero-background {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(50, 50, 50, 0.5);
+	z-index: 100;
+	display: none;
+
+	&--on {
+		display: block;
+	}
+}
+
+.load-spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// SEARCH SPINNER WITH BACKGROUND END
+////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// CLOSE BOX - icon of X with background for closing sth
+////////////////////////////////////////////////////////////////////////////////////////////
+.close-box {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	background-color: var(--gradient-color-3-light);
+	border-radius: 50%;
+	transform: translate(-5px, 5px);
+	transition: 0.4s $transition-cubic;
+	cursor: pointer;
+
+	&:hover {
+		transform: translate(-5px, 5px) scale(1.2);
+	}
+
+	&::after,
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 2px;
+		width: 50%;
+		background-color: var(--gradient-color-3-dark);
+		transform: translate(-50%, -50%);
+		display: inline-block;
+		transition: 0.4s $transition-cubic;
+	}
+
+	&:hover::after {
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	&:hover::before {
+		transform: translate(-50%, -50%) rotate(-45deg);
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// CLOSE BOX END
+////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// EXPAND ARROW ICON - for expanding and collapsing weathe box
+////////////////////////////////////////////////////////////////////////////////////////////
+.expand-arrow {
+	display: flex;
+	justify-content: center;
+
+	&-icon {
+		stroke: $font-white;
+		width: 40px;
+		height: 40px;
+		transform: rotate(0);
+		transition: transform 0.3s;
+
+		&--up {
+			transform: rotate(180deg);
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+// CLOSE BOX END
+////////////////////////////////////////////////////////////////////////////////////////////

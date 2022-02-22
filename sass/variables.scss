@@ -1,0 +1,47 @@
+/*- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+//colors:
+$font-white: #f8f9fa;
+$font-grey: #959596;
+$font-purple: #c7bfdc;
+$dark-gray: #343a40;
+
+// transitions
+$transition-cubic: cubic-bezier(0, 1.2, 1, 1);
+
+.theme-dark {
+	--gradient-color-1-light: #d893e9;
+
+	--gradient-color-2-medium: #212529;
+
+	--gradient-color-3-light: #5f3dc4;
+	--gradient-color-3-medium: #432b89;
+	--gradient-color-3-dark: #301f62;
+
+	--header-color: var(--gradient-color-3-medium);
+	--color-shadow: #4c319d;
+	--menu-font-color: #c6c7c8;
+	--light-theme: #c1bcd0;
+	--slider-color: #c2255c;
+}
+
+.theme-light {
+	--gradient-color-1-light: #a5d8ff;
+
+	--gradient-color-2-medium: #cee6eb;
+
+	--gradient-color-3-light: #5dacbd;
+	--gradient-color-3-medium: #cee6eb;
+	--gradient-color-3-dark: #24527a;
+
+	--header-color: #24527a;
+	--color-shadow: #a7baca;
+	--menu-font-color: #24527a;
+	--light-theme: #bdcbd7;
+	--slider-color: #5dacbd;
+}
